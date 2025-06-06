@@ -85,4 +85,22 @@ function validateForm(form) {
 // Add CSS class for scroll animations
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('loaded');
+});
+
+// Theme switching functionality
+const themeToggle = document.getElementById('theme-toggle');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+// Check for saved theme preference or use system preference
+const currentTheme = localStorage.getItem('theme') || 
+    (prefersDarkScheme.matches ? 'dark' : 'light');
+
+// Set initial theme
+document.documentElement.setAttribute('data-theme', currentTheme);
+
+// Theme toggle click handler
+themeToggle.addEventListener('click', () => {
+    const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
 }); 
